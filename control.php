@@ -49,6 +49,23 @@ if (!empty($_GET["power"])) {
 	}
 }
 
+if (!empty($_GET["input"])) {
+	switch ($_GET["input"]) {
+		case "1":
+			$command = "%1INPT 31";
+		break;
+		case "2":
+			$command = "%1INPT 32";
+		break;
+		case "get":
+			$command = "%1INPT ?";
+		break;		
+		default:
+			die('ERROR: Not defined value');
+		break;
+	}
+}
+
 # Encrypt command and send it to beamer
 if (!empty($command)) {
 	$command = md5($pwtoken . $beamerPassword) . $command;
@@ -61,6 +78,7 @@ if (!empty($command)) {
 	if (in_array($resultCode, array_keys($resultMessages))) {
 		die($resultCode . ': ' . $resultMessages[$resultCode]);
 	}
+	echo $result;
 }
 
 # Status request
