@@ -3,6 +3,7 @@
 include "config.php";
 
 $response = array();
+$pwtoken = "";
 
 # Establish TCP connection to beamer
 $url = 'tcp://' . $beamerIP . ':' . $beamerPort;
@@ -99,7 +100,7 @@ if ($_GET["status"] == "all") {
 		$value = substr($result, strpos($result, "=") + 1);
 		
 		if($key == "lamp") {
-			list ($value, $status) = split(' ', $value);
+			list ($value, $status) = explode(' ', $value);
 		}
 		
 		$response[$key] = intval($value);
